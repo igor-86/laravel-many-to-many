@@ -90,7 +90,8 @@ class ProjectController extends Controller
     {
         /* dd($project); */
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -115,6 +116,14 @@ class ProjectController extends Controller
         }
 
         $project->update($form_data);
+
+        /* Salvo le modifiche a tecnologia */
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies);
+        } else {
+            // $post->tags()->sync([]);
+            $project->technologies()->detach();
+        }
 
         return redirect()->route('admin.projects.index')->with('message', "$project->title è stato modificato!");
     }
