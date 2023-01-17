@@ -30,8 +30,15 @@
                 <div>
                     <p class="mt-3">{{ $project->article }}</p>
                 </div>
+                <div class="tags mt-2">
+                    @forelse ($project->technologies as $technology)
+                        <span>#{{ $technology->name }}</span>
+                    @empty
+                        <span>Nessun tag</span>
+                    @endforelse
+                </div>
                 <div>
-                    <a class="btn btn-dark" href="{{ route('admin.projects.index') }}">Projects</a>
+                    <a class="btn btn-dark mt-3" href="{{ route('admin.projects.index') }}">Projects</a>
                 </div>
             </div>
         </div>

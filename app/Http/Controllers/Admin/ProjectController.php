@@ -43,6 +43,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        /* dd($request->all()); */
         $form_data = $request->validated();
         /* dd($form_data); */
         /* if (array_key_exists('cover_image', $form_data)) {
@@ -56,8 +57,15 @@ class ProjectController extends Controller
 
             $form_data['cover_image'] = $path;
         }
+
+
         $form_data['slug'] = Project::generateSlug($form_data['title']);
         $project = Project::create($form_data);
+
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($request->technologies);
+        }
+
         return redirect()->route('admin.projects.index')->with('message', "$project->title è stato creato");
     }
 
