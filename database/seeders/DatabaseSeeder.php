@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             ProjectSeeder::class, /* Richiamo il projectseeder */
-            TypeSeeder::class /* Richiamo anche il Typeseeder */
+            TypeSeeder::class, /* Richiamo anche il Typeseeder */
+            TechnologySeeder::class
         ]);
     }
 }

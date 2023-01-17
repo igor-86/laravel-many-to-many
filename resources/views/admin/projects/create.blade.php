@@ -28,6 +28,19 @@
                         </select>
                     </div>
                     <div class="form-group mb-3">
+                        <h4>Tecnologia</h4>
+                        @foreach ($technologies as $technology)
+                            <div class="form-check">
+                                <input type="checkbox" name="technologies[]" id="technology-{{ $technology->id }}"
+                                    class="form-check-input" value="{{ $technology->id }}">
+                                <label for="tag-{{ $technology->id }}"
+                                    class="form-check-label">{{ $technology->name }}</label>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="cover_image">Immagine</label>
                         <input type="file" name="cover_image" id="cover_image"
                             class="form-control @error('cover_image') is-invalid @enderror">
